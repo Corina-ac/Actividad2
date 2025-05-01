@@ -1,45 +1,28 @@
-import java.util.Scanner;
+private int[] numbers = new int[10]; // Almacena los números ingresados
+private int totalCount = 0;          // Cantidad de números almacenados
 
-public class BadNames {
-
-    // Arreglo donde guardaremos hasta 10 números
-    private int[] n = new int[10];   // ¿qué es “n”?
-    private int i = 0;               // índice actual… ¿“i” de qué?
-
-    // Método “a”: agrega un número al arreglo
-    public void a(int v) {
-        n[i++] = v;                  // “v” tampoco dice mucho
+// Agrega un nuevo número al arreglo
+public void addNumber(int number) {
+    if (totalCount < numbers.length) {
+        numbers[totalCount++] = number;
+    } else {
+        System.out.println("Límite de números alcanzado.");
     }
+}
 
-    // Método “b”: calcula la suma
-    public int b() {
-        int s = 0;                   // “s” -> ¿suma? ¿salario?
-        for (int j = 0; j < i; j++) {
-            s += n[j];
-        }
-        return s;
+// Retorna la suma de los números almacenados
+public int getSumOfNumbers() {
+    int sum = 0;
+    for (int index = 0; index < totalCount; index++) {
+        sum += numbers[index];
     }
+    return sum;
+}
 
-    // Método “c”: promedio de los números guardados
-    public double c() {
-        return i == 0 ? 0 : (double) b() / i;
+// Calcula el promedio de los números ingresados
+public double calculateAverage() {
+    if (totalCount == 0) {
+        return 0;
     }
-
-    // Pequeña interfaz de consola para ejecutar y probar
-    public static void main(String[] args) {
-        BadNames x = new BadNames();               // ¿por qué “x”?
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("¿Cuántos números ingresará? ");
-        int t = sc.nextInt();                      // “t” -> ¿total?
-
-        for (int k = 0; k < t; k++) {              // “k” -> contador genérico
-            System.out.print("Número: ");
-            x.a(sc.nextInt());
-        }
-
-        System.out.println("Suma = " + x.b());
-        System.out.println("Promedio = " + x.c());
-        sc.close();
-    }
+    return (double) getSumOfNumbers() / totalCount;
 }
